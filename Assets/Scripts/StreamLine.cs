@@ -24,14 +24,6 @@ public class StreamLine : MonoBehaviour
         splashParticle = GetComponentInChildren<ParticleSystem>();
         addScore = FindObjectOfType<AddScore>();
         addScore.activateScore = false; 
-
-        /*
-        MeshCollider meshCollider = this.gameObject.AddComponent<MeshCollider>();
-        meshCollider.convex = true;
-        //meshCollider.isTrigger = true;
-        Mesh mesh = new Mesh();
-        lineRenderer.BakeMesh(mesh, true);
-        meshCollider.sharedMesh = mesh;        */
     }
 
     private void Start()

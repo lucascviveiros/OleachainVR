@@ -12,17 +12,13 @@ namespace TS.GazeInteraction
     public class GazeReticle : MonoBehaviour
     {
         #region Variables
-
         [Header("Inner")]
         [SerializeField] private Canvas _canvas;
         [SerializeField] private Image _imageProgress;
-
         [Header("Configuration")]
         [SerializeField] private float _scale = 0.0015f;
         [SerializeField] private float _offsetFromHit = 0.1f;
-
         private GazeInteractor _interactor;
-
         #endregion
 
         private void Start()

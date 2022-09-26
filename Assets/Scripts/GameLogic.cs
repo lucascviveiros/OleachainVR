@@ -10,7 +10,6 @@ public class GameLogic : MonoBehaviour
     [SerializeField] private float spawnDelay = 15;
     [SerializeField] private Transform referenceTransform;
     [SerializeField] private TimerCountdown timer;
-
     [SerializeField] List<GameObject> resourcesList;
 
     private int foodIndex = 0;
@@ -30,9 +29,7 @@ public class GameLogic : MonoBehaviour
         resourcesList.Add(Obj as GameObject);
 
         //Obj = Resources.Load("Prefabs/Salmon");
-
         //resourcesList.Add(Obj as GameObject);
-
     }
 
     void Start()
@@ -43,6 +40,11 @@ public class GameLogic : MonoBehaviour
     public void SpawnAgain()
     {
         timer.ReturnTimer();
+
+        Vector3 particleY = new Vector3(0.0f, 0.5f, 0.0f);
+        particleY += referenceTransform.transform.position;
+        Instantiate(particleSystem, particleY, referenceTransform.transform.rotation);
+
         /*
         if (foodIndex == 2)
         {
@@ -55,13 +57,7 @@ public class GameLogic : MonoBehaviour
             Instantiate(resourcesList[foodIndex], referenceTransform.transform.position, referenceTransform.transform.rotation);
         //}
 
-        Vector3 particleY = new Vector3(0.0f, 0.5f, 0.0f);
-        particleY += referenceTransform.transform.position;
-        Instantiate(particleSystem, particleY, referenceTransform.transform.rotation);
-
-
         //Debug.Log("count list: " + resourcesList.Count + " index: " + foodIndex);
-
 
         if (foodIndex < resourcesList.Count - 1)
         {

@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/GAME.unity
-    guid: 69ebb1214335b3548b6c48b9050d4f3b
+    path: Assets/Scenes/Quiz.unity
+    guid: 3c3c2d9fa1b424b8f8f3b5c79efa55a8
   - enabled: 0
-    path: Assets/ThirdParty/VirtualGrasp/Scenes/onboarding/VG_Onboarding.unity
-    guid: fd76f8b8cc5f2274f89e28e999e449d3
+    path: Assets/Scenes/GAME_OCULUS_SDK.unity
+    guid: 03de21ab343a44b149b8c5caace4d209
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: f3d36b094c7e90a48bfeecc8253553a0,
       type: 2}

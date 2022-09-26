@@ -20,14 +20,8 @@ public class RespawnForBottle : MonoBehaviour
 
     private bool once;
 
-    [Header("Control")]
-    public float rapawnWhenHigher = 0.3f;
-
-    //[SerializeField] private GameObject SafeArea;
-
     private void Start()
     {
-      //  SafeArea = GameObject.FindGameObjectWithTag("SafeArea");
         _rigidBody = GetComponent<Rigidbody>();
         pourDetector = GetComponent<PourDetector>();
         initialWorldPos = transform.position;
@@ -40,33 +34,6 @@ public class RespawnForBottle : MonoBehaviour
         {
             RespawnObject();
         }
-
-        if (transform.position.y >= rapawnWhenHigher && !once)
-        {
-            RespawnObject();
-        }
-
-        /*
-         if (transform.localPosition.x > SafeArea.transform.localPosition.x)
-         {
-             Debug.Log("Outside safe area X");
-             RespawnObject();
-         }
-         else if (transform.localPosition.y > SafeArea.transform.localPosition.y)
-         {
-             Debug.Log("Outside safe area Y");
-
-             RespawnObject();
-         }
-         else if (transform.localPosition.z > SafeArea.transform.localPosition.z)
-         {
-             Debug.Log("Outside safe area Z");
-
-             RespawnObject();
-         } 
-
-         */
-
     }
 
     private void RespawnObject()

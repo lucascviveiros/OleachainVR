@@ -19,23 +19,11 @@ public class PourDetector : MonoBehaviour
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-       
-        
-        // animation = GetComponent<Animation>();
-       // animation.enabled = activate;
+
     }
 
     private void Update()
     {
-        //if (Input.GetKeyDown("space"))
-        /*
-        if (OVRInput.GetDown(OVRInput.Button.One))
-        {
-            //print("space pressed");
-            activate = !activate;
-            //animation.enabled = activate;
-        }
-        */
         if (activate)
         {
             bool pourCheck = CalculatePourAngle() < pourThreshold;

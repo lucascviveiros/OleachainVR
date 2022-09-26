@@ -5,11 +5,9 @@ using UnityEngine;
 public class DeliveryFood : MonoBehaviour
 {
     [SerializeField] private AudioSource audioSource;
-    public AudioClip audioClip1;
-
     [SerializeField] private GameLogic gameLogic;
-
     private bool ChangeFood = false;
+    public AudioClip audioClip1;
 
     private void Start()
     {

@@ -34,7 +34,6 @@ public class TimerCountdown : MonoBehaviour
     IEnumerator TimerTaker()
     {
         addScore.EnableScoreInTime(true);
-
         takingAwak = true;
         yield return new WaitForSecondsRealtime(1);
         secondsLeft -= 1;
@@ -45,7 +44,6 @@ public class TimerCountdown : MonoBehaviour
         {
             counterColor.color = UnityEngine.Color.yellow;
             audioFinishing.Play();
-            //Play Audio
         }
         
         if(secondsLeft == 0)
@@ -53,7 +51,6 @@ public class TimerCountdown : MonoBehaviour
             counterColor.color = UnityEngine.Color.red;
             addScore.EnableScoreInTime(false);
             DeliverFood();
-            //Play audio
         }
     }
 
@@ -66,6 +63,5 @@ public class TimerCountdown : MonoBehaviour
     private void DeliverFood()
     {
         Instantiate(deliverObj, referenceTransform2.transform.position, referenceTransform2.transform.rotation);
-        // Play Audio
     }
 }
