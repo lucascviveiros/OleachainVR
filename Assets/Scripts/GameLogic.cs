@@ -24,7 +24,15 @@ public class GameLogic : MonoBehaviour
 
         resourcesList.Add(Obj as GameObject);
 
+        Obj = Resources.Load("Prefabs/Chicken");
+
+        resourcesList.Add(Obj as GameObject);
+
         Obj = Resources.Load("Prefabs/Pizza2");
+        
+        resourcesList.Add(Obj as GameObject);
+
+        Obj = Resources.Load("Prefabs/Cheese");
         
         resourcesList.Add(Obj as GameObject);
 

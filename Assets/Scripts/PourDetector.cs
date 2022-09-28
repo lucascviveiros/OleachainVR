@@ -6,20 +6,14 @@ public class PourDetector : MonoBehaviour
     public int pourThreshold = 45;
     public Transform origin = null;
     public GameObject streamPrefab = null;
-
     private bool isPouring = false;
     private StreamLine currentStream = null;
-
-    [SerializeField] private bool activate = true;
-
+    private bool activate = true;
     [SerializeField] private AudioSource audioSource;
-
-    //private Animation animation;
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-
     }
 
     private void Update()

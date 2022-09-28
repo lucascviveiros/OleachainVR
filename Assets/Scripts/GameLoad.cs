@@ -8,11 +8,6 @@ public class GameLoad : MonoBehaviour
 {
     private bool _loading = false;
 
-    public void Start()
-    {
-        //LoadScene(1);
-    }
-
     public void LoadScene(int levelIndex)
     {
         if (_loading) return;

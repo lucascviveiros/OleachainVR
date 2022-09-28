@@ -39,7 +39,6 @@ public class QuizManager : MonoBehaviour
         }
     }
 
-    private int round = 0;
     [SerializeField] private  GameLoad gameLoad;
     [SerializeField] private TextMeshProUGUI t_question;
     [SerializeField] private TextMeshProUGUI t_options;
@@ -50,7 +49,9 @@ public class QuizManager : MonoBehaviour
     [SerializeField] private Transform referenceTransform;
     private AudioClip clip;
     private bool lockAnswer;
+    private int round = 0;
     private List<QuizManager.Quiz> randomQuiz = new List<QuizManager.Quiz>();
+    private SceneController sceneController;
 
     private List<string> question = new List<string>
     {
@@ -76,6 +77,32 @@ public class QuizManager : MonoBehaviour
         "Qual o período mais indicado para a prática da plantação das oliveiras?"
     };
 
+    //timer 3 minutos
+
+    private List<string> question_en = new List<string>
+    {
+        "Which of the following instruments is used in traditional harvesting?",
+        "Where is the oldest olive tree in the world?",
+        "The oldest olive tree in the world is estimated to have...",
+        "What is the diameter of the trunk of the oldest olive tree in the world?",
+        "On average, how many kilograms of olives does it take to produce a liter of artisanal extra virgin olive oil?",
+        "Man once carried an olive branch to...",
+        "How many people, on average, does it take to embrace the oldest olive tree in Portugal?",
+        "Where is the oldest olive tree in Portugal?",
+        "The branches of the olive tree are associated with:",
+        "What can the olive pit be used for?",
+        "What are the predominant varieties of olive trees in the Trás-os-Montes region?",
+        "In the Trás-os-Montes olive grove, what is the area occupied by the Cobrançosa variety?",
+        "In which months of the year does the olive harvest normally take place in Portugal?",
+        "Which of the following is not a pest of the olive grove?",
+        "How many calories are in approximately 100 grams of olive oil?",
+        "What is the lowest quality olive oil?",
+        "Olive oil can be used to ...",
+        "Which of these options represents the correct order of the olive oil transformation process?",
+        "How many olives were produced in Trás-os-Montes in 2019?",
+        "What is the most suitable period for the practice of planting olive trees?"
+    };
+
     private List<string> options = new List<string>
     {
         "A. Vara.\nB. Varejador elétrico.\nC. Trator.\nD. Foice.", //A
@@ -99,6 +126,30 @@ public class QuizManager : MonoBehaviour
         "A. De 300 000 a 500 000 toneladas.\nB. Mais de 900 000 toneladas.\nC. De 10 000 a 100 000 toneladas.\nD. De 600 000 a 800 000 toneladas.",
         "A. Setembro e outubro e/ou março e abril.\nB. Janeiro e fevereiro e/ou novembro e dezembro.\nC. Setembro e Outubro e/ou Janeiro e Fevereiro.\nD. Março e Abril e/ou Julho e Agosto."
     };
+
+     private List<string> options_en = new List<string>
+    {
+        "A. Rod.\nB. Electric sweeper.\nC. Tractor.\nD. Sickle.", //A
+        "A. Portugal.\nB. Greece.\nC. Spain.\nD. Italy.", //B
+        "A. ... from 3 to 5 thousand years.\nB. ... less than 500 years.\nC. ... from 6 to 9 thousand years.\nD. ... from 500 years to 2000 years. ", //A
+        "A. 1.50 meters.\nB. 3.56 meters.\nC. 5.10 meters.\nD. 4.60 meters.",
+        "A. 2 kilos.\nB. 1 kilo.\nC.4 kilos.\nD. 6 kilos.",
+        "A. ... Mars.\nB. ... Jupiter.\nC. ... to the moon.\nD. ... to the sun.",
+        "A. 5 people.\nB. 33 people.\nC. 12 people.\nD. 7 people.",
+        "A. Gostei – Bragança.\nB. Cascalhos – Abrantes.\nC. Bemposta – Mogadouro.\nD. Arraiolos – Évora.",
+        "A. Death.\nB. Peace.\nC. Fertility.\nD. Purity.",
+        "A. Combustion.\nB. Human food.\nC. Plant fertilization.\nD. Lubrication.",
+        "A. Cordovil, Carrasquenha, Picual, Negrinha and Gordal.\nB. Picual, Arbequina, Leccino, Coratina and Frantoio.\nC. Verdeal, Madural, Negrinha, Santulhana and Cobrançosa.\nD. Coratina, Missão, Kalamata, Gordal and Verdeal.",
+        "A. 70%.\nB. 50%.\nC. 20%.\nD. 10%",
+        "A. From January to March.\nB. From March to May.\nC. From June to August.\nD. From September to December.",
+        "A. Olive fly (Bactrocera oleae).\nB. Tuberculosis (Pseudomonas Savastanoi).\nC. Gafa (Colletotrichum acutatum).\nD. Moth (Prays Oleae).",
+        "A. 900 kcal.\nB. 100 kcal.\nC. 650 kcal.\nD.220 kcal.",
+        "A. Lampante.\nB. Virgin.\nC. Extra Virgin.\nD. Pure.",
+        "A. Combustion.\nB. Cosmetics.\nC. Food.\nD. All of the above.",
+        "A. Harvest – transport – cleaning – milling – filtration – distribution.\nB. Distribution - milling – transport – cleaning – filtration – harvesting.\nC. Harvesting – transport – milling – cleaning – filtration – distribution.\nD. Harvesting – cleaning – transport – filtration – milling distribution.",
+        "A. From 300,000 to 500,000 tons.\nB. More than 900,000 tons.\nC. From 10,000 to 100,000 tons.\nD. From 600,000 to 800,000 tons.",
+        "A. September and October and/or March and April.\nB. January and February and/or November and December.\nC. September and October and/or January and February.\nD. March and April and/or July and August."
+    };
    
     private string[] answers = new string[20]
     {
@@ -107,23 +158,35 @@ public class QuizManager : MonoBehaviour
 
     private void Start() 
     {
+        sceneController = GameObject.FindObjectOfType<SceneController>();
+
         t_question = GameObject.Find("CanvasQuiz/Panel/TextQuestion").GetComponent<TextMeshProUGUI>();
         t_options = GameObject.Find("CanvasQuiz/Panel/TextOptions").GetComponent<TextMeshProUGUI>();
 
         List<QuizManager.Quiz> listQuiz = new List<QuizManager.Quiz>();
 
-        for(int i = 0; i<= (question.Count - 1); i++)
+        if (sceneController.GetSceneChonsen()) //english
         {
-            listQuiz.Add(new QuizManager.Quiz(question.ElementAt(i), options.ElementAt(i), answers[i]));
+            for(int i = 0; i<= (question_en.Count - 1); i++)    
+            {
+                listQuiz.Add(new QuizManager.Quiz(question_en.ElementAt(i), options_en.ElementAt(i), answers[i]));
+            }
         }
-
+        else //portuguese
+        {
+            for(int i = 0; i<= (question.Count - 1); i++)
+            {
+                listQuiz.Add(new QuizManager.Quiz(question.ElementAt(i), options.ElementAt(i), answers[i]));
+            }
+        }
+        
         Random rng = new Random();
         randomQuiz = listQuiz.OrderBy(_ => rng.Next()).ToList();
-        
+        /*
         foreach (var item in randomQuiz)
         {
             Debug.Log("Q: " + item.Question + " A: " + item.Answer);
-        }
+        }*/
 
         t_question.text = randomQuiz.ElementAt(0).Question;
         t_options.text = randomQuiz.ElementAt(0).Options;
@@ -136,7 +199,6 @@ public class QuizManager : MonoBehaviour
         clip = audioClips[1];
         audioSource.clip = clip;
         audioSource.Play();
-
     }
     
     private void PlayForWrongAnswer()
@@ -187,7 +249,7 @@ public class QuizManager : MonoBehaviour
         }
         else
         {
-            gameLoad.LoadScene(1);
+            gameLoad.LoadScene(3);
         }
     }
 

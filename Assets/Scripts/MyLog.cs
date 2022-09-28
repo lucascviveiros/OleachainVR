@@ -52,7 +52,7 @@ public class MyLog : MonoBehaviour
         }
     }
 
-    /* Log for Mobile/Desktop applications
+    /* For Mobile/Desktop applications
     void HandleLog(string logString, string stackTrace, LogType type)
     {
         myLog = logString;

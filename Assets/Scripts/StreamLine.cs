@@ -33,21 +33,25 @@ public class StreamLine : MonoBehaviour
             oliveOilType[0] = true;
             oliveOilType[1] = false;  
 
-            Debug.Log("Azeite do ChousasNostras");      
+            //Debug.Log("Azeite do ChousasNostras");      
         }
         else if (transform.parent.name == "RoundOliveOilBottle_SegredosDoCoa") //Pizza2
         {
             oliveOilType[0] = false;
             oliveOilType[1] = true;     
-            Debug.Log("Azeite do Segredos do Coa");      
+            //Debug.Log("Azeite do Segredos do Coa");      
    
         }
         else if (transform.parent.name == "RoundOliveOilBottle_SegredosDoCoa" && transform.parent.name == "ChousasNostrasBottle") 
         {
-            Debug.Log("Bug na Matrix");       
+            //Debug.Log("Bug na Matrix");       
+        }
+        else
+        {
+            oliveOilType[0] = false;
+            oliveOilType[0] = false;
         }
         
-
         MoveToPosition(0, transform.position);
         MoveToPosition(1, transform.position);
     }
@@ -123,6 +127,10 @@ public class StreamLine : MonoBehaviour
                 {
                     addScore.WrongOliveOil();
                 }            
+            }
+            else
+            {
+                StoppedPouring();
             }            
         }
         else
