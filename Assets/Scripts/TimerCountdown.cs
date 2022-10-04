@@ -2,43 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TimerCountdown : MonoBehaviour
 {
-    public GameObject textDisplay;
-    private GameObject deliverObj;
-    public int secondsLeft = 30;
-    public bool takingAwak;
-    [SerializeField] private Transform referenceTransform2;
+    private int secondsLeft = 0; 
+    private bool b_secondsControl;
     [SerializeField] private Image counterColor;
     [SerializeField] private AudioSource audioFinishing;
-    [SerializeField] private AddScore addScore;
+  
+    //Events
+    public delegate void TimerFinished();
+    public static event TimerFinished OnTimerFinished;
+    public delegate void TimerChange();
+    public static event TimerChange OnTimerChange;
 
-    void Start()
+    public void SetInitialSecondsLeft(int initialSecondsLeft)
     {
-        var Obj = Resources.Load("Prefabs/DeliveryHightlight");
-        deliverObj = Obj as GameObject;
-        textDisplay.GetComponent<Text>().text = "00:" + secondsLeft;
-        addScore = GetComponent<AddScore>();
-        addScore.EnableScoreInTime(true);
+        secondsLeft = initialSecondsLeft;
     }
 
     void Update()
     {
-        if(takingAwak == false && secondsLeft > 0)
+        if(b_secondsControl == false && secondsLeft > 0)
         {
-            StartCoroutine(TimerTaker());
+            StartCoroutine(TimerCounter());
         }
     }
 
-    IEnumerator TimerTaker()
+    private IEnumerator TimerCounter()
     {
-        addScore.EnableScoreInTime(true);
-        takingAwak = true;
+        b_secondsControl = true;
         yield return new WaitForSecondsRealtime(1);
         secondsLeft -= 1;
-        textDisplay.GetComponent<Text>().text = "00:" + secondsLeft;
-        takingAwak = false;
+        OnTimerChange(); //Enable Event
+        b_secondsControl = false;
 
         if (secondsLeft == 1 || secondsLeft == 2 || secondsLeft == 3) 
         {
@@ -49,8 +47,7 @@ public class TimerCountdown : MonoBehaviour
         if(secondsLeft == 0)
         {
             counterColor.color = UnityEngine.Color.red;
-            addScore.EnableScoreInTime(false);
-            DeliverFood();
+            OnTimerFinished(); //Enable event        
         }
     }
 
@@ -58,10 +55,5 @@ public class TimerCountdown : MonoBehaviour
     {
         counterColor.color = Color.green;
         secondsLeft = 15;
-    }
-
-    private void DeliverFood()
-    {
-        Instantiate(deliverObj, referenceTransform2.transform.position, referenceTransform2.transform.rotation);
     }
 }

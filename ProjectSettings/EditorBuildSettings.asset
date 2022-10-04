@@ -5,18 +5,24 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Language.unity
     guid: 9039be4c44551451ebb19a5615e2e963
-  - enabled: 0
-    path: Assets/Scenes/Quiz_PT.unity
-    guid: 3c3c2d9fa1b424b8f8f3b5c79efa55a8
-  - enabled: 0
+  - enabled: 1
+    path: Assets/Scenes/TypeName.unity
+    guid: 3e2739848507149b2aa0c3e7ffcc84c8
+  - enabled: 1
     path: Assets/Scenes/Quiz_EN.unity
     guid: 169ea13c8bede471c840174edfae4f17
   - enabled: 1
+    path: Assets/Scenes/Quiz_PT.unity
+    guid: a29b0d428c0734c2d9f7a5802388897d
+  - enabled: 1
     path: Assets/Scenes/GAME_OCULUS_SDK.unity
     guid: 03de21ab343a44b149b8c5caace4d209
+  - enabled: 0
+    path: Assets/Cyber Club/DemoScene.unity
+    guid: 87d46ab22ac0b66498051dee9c213143
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: f3d36b094c7e90a48bfeecc8253553a0,
       type: 2}

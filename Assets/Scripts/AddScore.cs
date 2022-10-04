@@ -10,7 +10,8 @@ public class AddScore : MonoBehaviour
     public bool enableScoreTimer;
     public Text oliveOilText;
 
-    private void Awake(){
+    private void Awake()
+    {
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -32,7 +33,7 @@ public class AddScore : MonoBehaviour
         SumScore.Add(points);
     }
 
-    public void EnableScoreInTime(bool enableScore)
+    public void EnableScoreTimer(bool enableScore)
     {
         enableScoreTimer = enableScore;
     }

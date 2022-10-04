@@ -1,18 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 /// <summary>Manager for SumScore accessible from inspector</summary>
 /// <remarks>
 /// Attach to game object in scene. 
 /// This is a singleton so only one instance can be active at a time.
 /// </remarks>
-public class SumScoreManager : MonoBehaviour {
-
+public class SumScoreManager : MonoBehaviour 
+{
     public static SumScoreManager instance = null;  // Static instance for singleton
-
     public int initialScore = 0;
     public bool storeHighScore = true, allowNegative = true;
-    public Text field; // Text field displaying current score
+    public TextMeshProUGUI field; // Text field displaying current score
     //public Text highScoreField; // Text field displaying high score
 
     void Awake() {
@@ -56,6 +56,5 @@ public class SumScoreManager : MonoBehaviour {
         //if(storeHighScore)
            // highScoreField.text = SumScore.HighScore.ToString("0"); // Post new high score to text field
     }
-
-
+    
 }

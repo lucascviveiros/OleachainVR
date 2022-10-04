@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System.Linq;
 using Random = System.Random;
+using System;
 
 public class QuizManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class QuizManager : MonoBehaviour
         private string answer;
         private string question;
         private string options;
+        private string answerDescription;
 
         public string Question
         {
@@ -31,25 +33,39 @@ public class QuizManager : MonoBehaviour
             set { answer = value; }
         }
 
-        public Quiz(string question, string options, string answer)
+        public string AnswerDescription
+        {
+            get {return answerDescription; }
+            set { answerDescription = value; }
+        }
+
+        public Quiz(string question, string options, string answer, string answerDescription)
         {
             this.question = question;
             this.options = options;
             this.answer = answer;
+            this.answerDescription = answerDescription;
         }
     }
 
-    [SerializeField] private  GameLoad gameLoad;
+    [SerializeField] private GameLoad gameLoad;
     [SerializeField] private TextMeshProUGUI t_question;
     [SerializeField] private TextMeshProUGUI t_options;
-    [SerializeField] private TextMeshProUGUI t_debugg;
+    [SerializeField] private TextMeshProUGUI t_answerDescription;
+    [SerializeField] private TextMeshProUGUI t_score;
+    [SerializeField] private GameObject CanvasAnswer;
+    [SerializeField] private GameObject CanvasScore;
     [SerializeField] private List<AudioClip> audioClips;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private GameObject particleSystem;
     [SerializeField] private Transform referenceTransform;
+    [SerializeField] private TextMeshProUGUI t_TimerDisplay;
+    [SerializeField] private TimerCountdown timerCountdown;
+
     private AudioClip clip;
     private bool lockAnswer;
     private int round = 0;
+    private int initialSeconds = 6;
     private List<QuizManager.Quiz> randomQuiz = new List<QuizManager.Quiz>();
     private SceneController sceneController;
 
@@ -127,7 +143,7 @@ public class QuizManager : MonoBehaviour
         "A. Setembro e outubro e/ou março e abril.\nB. Janeiro e fevereiro e/ou novembro e dezembro.\nC. Setembro e Outubro e/ou Janeiro e Fevereiro.\nD. Março e Abril e/ou Julho e Agosto."
     };
 
-     private List<string> options_en = new List<string>
+    private List<string> options_en = new List<string>
     {
         "A. Rod.\nB. Electric sweeper.\nC. Tractor.\nD. Sickle.", //A
         "A. Portugal.\nB. Greece.\nC. Spain.\nD. Italy.", //B
@@ -156,41 +172,57 @@ public class QuizManager : MonoBehaviour
         "A", "B", "A", "D", "D", "C", "A", "B", "B", "A", "C" , "C", "D", "B", "A", "A", "D", "A", "B", "A" 
     };
 
+    private string[] answersDescription = new string[20]
+    {
+       "A - Vara.", "B - Grécia.", "A - De 3 a 5 mil anos.", "D - 4,60 metros.", "D - 6 quiilos.", "C - À lua.", "A - 5 pessoas.", "B - Cascalhos – Abrantes.", "B - Paz.", "A - Combustão.", "C - Verdeal, Madural, Negrinha, Santulhana e Cobrançosa." , "C - 20%.", "D - De Setembro a Dezembro.", "B - Tuberculosis (Pseudomonas Savastanoi).", "A - 900 kcal.", "A - Lampante.", "D - Todas as anteriores.", "A - Colheita – transporte – limpeza – moenda – filtração – distribuição.", "B - Mais de 900 000 toneladas.", "A - Setembro e Outubro e/ou Março e Abril." 
+    };
+
+    private string[] answersDescription_en = new string[20]
+    {
+       "A - Rod.", "B - Greece.", "A - From 3 to 5 thousand years.", "D - 4,60 meters.", "D - 6 kilos.", "C - To the moon.", "A - 5 people.", "B - Cascalhos – Abrantes.", "B - Peace.", "A - Combustion.", "C - Verdeal, Madural, Negrinha, Santulhana and Cobrançosa." , "C - 20%", "D - From September to December.", "B - Tuberculosis (Pseudomonas Savastanoi).", "A - 900 kcal.", "A - Lampante.", "D - All of the above.", "A - Harvest – transport – cleaning – milling – filtration – distribution.", "B -  More than 900,000 tons.", "A - September and October and/or March and April." 
+    };
+
     private void Start() 
     {
-        sceneController = GameObject.FindObjectOfType<SceneController>();
+        t_question = GameObject.Find("[CANVAS_QUIZ]/Panel/TextQuestion").GetComponent<TextMeshProUGUI>();
+        t_options = GameObject.Find("[CANVAS_QUIZ]/Panel/TextOptions").GetComponent<TextMeshProUGUI>();
+        t_answerDescription = GameObject.Find("[CANVAS_ANSWER]/Panel/TextAnswer").GetComponent<TextMeshProUGUI>();
+        t_score = GameObject.Find("[CANVAS_SCORE]/Panel/TextScore").GetComponent<TextMeshProUGUI>();
+        t_score.text = "0";
+        t_TimerDisplay = GameObject.Find("[CANVAS_QUIZ]/Panel/BackgroungTimerPanel/TextTimerDisplay").GetComponent<TextMeshProUGUI>();
+        t_TimerDisplay.GetComponent<TextMeshProUGUI>().text = "00:" + initialSeconds;
+        timerCountdown = FindObjectOfType<TimerCountdown>();
 
-        t_question = GameObject.Find("CanvasQuiz/Panel/TextQuestion").GetComponent<TextMeshProUGUI>();
-        t_options = GameObject.Find("CanvasQuiz/Panel/TextOptions").GetComponent<TextMeshProUGUI>();
+        timerCountdown.SetInitialSecondsLeft(initialSeconds);
+
+        CanvasAnswer = GameObject.Find("[CANVAS_ANSWER]");
+        CanvasScore = GameObject.Find("[CANVAS_SCORE]");
+        CanvasAnswer.SetActive(false);
+        CanvasScore.SetActive(false);
 
         List<QuizManager.Quiz> listQuiz = new List<QuizManager.Quiz>();
+        /*sceneController = GameObject.FindObjectOfType<SceneController>();
 
         if (sceneController.GetSceneChonsen()) //english
         {
             for(int i = 0; i<= (question_en.Count - 1); i++)    
             {
-                listQuiz.Add(new QuizManager.Quiz(question_en.ElementAt(i), options_en.ElementAt(i), answers[i]));
+                listQuiz.Add(new QuizManager.Quiz(question_en.ElementAt(i), options_en.ElementAt(i), answers[i], answersDescription_en[i]));
             }
         }
         else //portuguese
         {
             for(int i = 0; i<= (question.Count - 1); i++)
             {
-                listQuiz.Add(new QuizManager.Quiz(question.ElementAt(i), options.ElementAt(i), answers[i]));
+                listQuiz.Add(new QuizManager.Quiz(question.ElementAt(i), options.ElementAt(i), answers[i], answersDescription[i]));
             }
         }
         
         Random rng = new Random();
         randomQuiz = listQuiz.OrderBy(_ => rng.Next()).ToList();
-        /*
-        foreach (var item in randomQuiz)
-        {
-            Debug.Log("Q: " + item.Question + " A: " + item.Answer);
-        }*/
 
         t_question.text = randomQuiz.ElementAt(0).Question;
-        t_options.text = randomQuiz.ElementAt(0).Options;
-
+        t_options.text = randomQuiz.ElementAt(0).Options;*/
     }
 
     private void PlayForCorrectAnswer()
@@ -219,23 +251,44 @@ public class QuizManager : MonoBehaviour
         {
             if(randomQuiz.ElementAt(round).Answer == option)
             {
+                //t_answerDescription.color = Color.green;
+                AddScore();
                 PlayForCorrectAnswer();
+                ShowScore();
             }
             else
             {
+                //t_answerDescription.color = Color.green;
+                ShowRightAnswer(round);
+
                 PlayForWrongAnswer();
             }
 
             lockAnswer = true;
-            NextRound();
             StartCoroutine(WaitForNextAnswer());
         }
     }
 
+    private void ShowRightAnswer(int round)
+    {
+        CanvasAnswer.SetActive(true);
+        t_answerDescription.text = randomQuiz.ElementAt(round).AnswerDescription;
+    }
+
+    private void ShowScore()
+    {
+        CanvasScore.SetActive(true);
+        t_score.text = scoreQuiz.ToString();
+    }
+
     private IEnumerator WaitForNextAnswer()
     {
-        yield return new WaitForSecondsRealtime(1.5f);
+        yield return new WaitForSecondsRealtime(5f);
+        t_answerDescription.text = "";
+        CanvasAnswer.SetActive(false);
+        CanvasScore.SetActive(false);
         lockAnswer = false;
+        NextRound();
     }
 
     private void NextRound()
@@ -245,11 +298,10 @@ public class QuizManager : MonoBehaviour
             round++;
             t_question.text = randomQuiz.ElementAt(round).Question;
             t_options.text = randomQuiz.ElementAt(round).Options;
-
         }
         else
         {
-            gameLoad.LoadScene(3);
+            gameLoad.LoadScene(4); //game mode
         }
     }
 
@@ -261,4 +313,43 @@ public class QuizManager : MonoBehaviour
         Destroy(particle, 2.0f);
     }
 
+    private int scoreQuiz = 0; 
+
+    private void AddScore()
+    {
+        scoreQuiz += 100;
+    }
+
+    private void FinishQuiz()
+    {
+        //Finish Quiz show score
+        //PlaySound for finishing Quiz
+        ShowScore();
+    }
+
+    private void ChangeTimerDisplay()
+    {
+        initialSeconds--;
+        TimeSpan timeWithMinutes = TimeSpan.FromSeconds( initialSeconds );
+
+        string answer = string.Format("{0:D2}m:{1:D2}s", 
+                timeWithMinutes.Minutes, 
+                timeWithMinutes.Seconds);
+
+        //t_TimerDisplay.GetComponent<TextMeshProUGUI>().text = "00:" + timeWithMinutes;
+        t_TimerDisplay.GetComponent<TextMeshProUGUI>().text = answer.ToString();
+
+    }
+
+    void OnEnable() 
+    {
+        TimerCountdown.OnTimerFinished += FinishQuiz;
+        TimerCountdown.OnTimerChange += ChangeTimerDisplay;
+    }
+
+    void OnDisable()
+    {
+        TimerCountdown.OnTimerFinished -= FinishQuiz;
+        TimerCountdown.OnTimerChange -= ChangeTimerDisplay;
+    }
 }

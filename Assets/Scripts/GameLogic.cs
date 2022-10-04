@@ -4,40 +4,42 @@ using UnityEngine;
 
 public class GameLogic : MonoBehaviour
 {
+    //private float nextSpawnTime;
+    [SerializeField] private GameObject explosionParticle;
+    [SerializeField] private Transform referenceToInstantiate;
+    [SerializeField] private DeliveryManager deliveryManager; //TimerCountdown timer;
+    [SerializeField] private List<GameObject> resourceFoodList;
     private GameObject foodObj;
-    private float nextSpawnTime;
-    [SerializeField] private GameObject particleSystem;
-    [SerializeField] private float spawnDelay = 15;
-    [SerializeField] private Transform referenceTransform;
-    [SerializeField] private TimerCountdown timer;
-    [SerializeField] List<GameObject> resourcesList;
-
     private int foodIndex = 0;
 
     private void Awake()
     {
-        timer = FindObjectOfType<TimerCountdown>();
+        referenceToInstantiate = GameObject.Find("[GAME_LOGIC]/ReferenceToInstantiateFood").GetComponent<Transform>();
         
-        resourcesList = new List<GameObject>();
+        deliveryManager = FindObjectOfType<DeliveryManager>();
+        //timer = FindObjectOfType<TimerCountdown>();
+        
+        resourceFoodList = new List<GameObject>();
+
+        var particleSystem = Resources.Load("Prefabs/EnergyExplosionLight");
+        explosionParticle = particleSystem as GameObject;
 
         var Obj = Resources.Load("Prefabs/Octopus2");
 
-        resourcesList.Add(Obj as GameObject);
+        resourceFoodList.Add(Obj as GameObject);
 
         Obj = Resources.Load("Prefabs/Chicken");
 
-        resourcesList.Add(Obj as GameObject);
+        resourceFoodList.Add(Obj as GameObject);
 
         Obj = Resources.Load("Prefabs/Pizza2");
         
-        resourcesList.Add(Obj as GameObject);
+        resourceFoodList.Add(Obj as GameObject);
 
         Obj = Resources.Load("Prefabs/Cheese");
         
-        resourcesList.Add(Obj as GameObject);
+        resourceFoodList.Add(Obj as GameObject);
 
-        //Obj = Resources.Load("Prefabs/Salmon");
-        //resourcesList.Add(Obj as GameObject);
     }
 
     void Start()
@@ -47,32 +49,27 @@ public class GameLogic : MonoBehaviour
 
     public void SpawnAgain()
     {
-        timer.ReturnTimer();
+        deliveryManager.FoodDelivered();
+        //timer.ReturnTimer();
 
         Vector3 particleY = new Vector3(0.0f, 0.5f, 0.0f);
-        particleY += referenceTransform.transform.position;
-        Instantiate(particleSystem, particleY, referenceTransform.transform.rotation);
+        particleY += referenceToInstantiate.transform.position;
+        Instantiate(explosionParticle, particleY, referenceToInstantiate.transform.rotation);
 
-        /*
-        if (foodIndex == 2)
-        {
-            GameObject obj = Instantiate(resourcesList[foodIndex], referenceTransform.transform.position, referenceTransform.transform.rotation);
-            obj.transform.Rotate(188.0f, 0.0f, 0.0f, Space.Self);
-        }
+        //GameObject obj = Instantiate(resourcesList[foodIndex], referenceTransform.transform.position, referenceTransform.transform.rotation);
+        //obj.transform.Rotate(188.0f, 0.0f, 0.0f, Space.Self);
 
-        else
-        {*/
-            Instantiate(resourcesList[foodIndex], referenceTransform.transform.position, referenceTransform.transform.rotation);
-        //}
-
+        Instantiate(resourceFoodList[foodIndex], referenceToInstantiate.transform.position, referenceToInstantiate.transform.rotation);
+        
         //Debug.Log("count list: " + resourcesList.Count + " index: " + foodIndex);
 
-        if (foodIndex < resourcesList.Count - 1)
+        if (foodIndex < resourceFoodList.Count - 1)
         {
             foodIndex++;
         }
         else
         {
+            //Finishing meals / finishing game
             foodIndex = 0;
         }
 

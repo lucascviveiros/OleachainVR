@@ -6,7 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class GameLoad : MonoBehaviour
 {
+    private SceneController sceneController;
+
     private bool _loading = false;
+
+   
+    void Start()
+    {
+        sceneController = GameObject.FindObjectOfType<SceneController>();
+    }
 
     public void LoadScene(int levelIndex)
     {
@@ -29,5 +37,17 @@ public class GameLoad : MonoBehaviour
     void Load(int levelIndex)
     {
         SceneManager.LoadScene(levelIndex);
+    }
+
+    public void LoadQuiz()
+    {
+        if(sceneController.GetSceneChonsen()) //en
+        {
+            LoadScene(2);
+        }
+        else
+        {
+            LoadScene(3);
+        }       
     }
 }

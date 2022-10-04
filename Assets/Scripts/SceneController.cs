@@ -9,7 +9,7 @@ public class SceneController : MonoBehaviour
 
     public void ChooseLanguage(string language)
     {
-        Debug.Log("Chosen language: " + language);
+        //Debug.Log("Chosen language: " + language);
         if (language == "P")
             chonsenLanguage = false;
         else if(language == "E")
@@ -20,10 +20,12 @@ public class SceneController : MonoBehaviour
 
     private void CallScene(bool chonsenLanguage)
     {
-        if(!chonsenLanguage)
-            gameLoad.LoadScene(1); //PT
-        else    
-            gameLoad.LoadScene(2); //EN
+        gameLoad.LoadScene(1); 
+
+        //if(!chonsenLanguage)
+            //gameLoad.LoadScene(1); //PT
+        //else    
+            //gameLoad.LoadScene(2); //EN
     }
 
     public bool GetSceneChonsen()
