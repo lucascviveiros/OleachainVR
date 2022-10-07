@@ -19,11 +19,11 @@ public class NameLanguage : MonoBehaviour
         } 
         else if(sceneController.GetSceneChonsen())
         {
-            t_typeNameDescription.text = "Welcome! Please use your index finger to type your name\n When you finished you can press START_QUIZ";
+            t_typeNameDescription.text = "Welcome! Please use your index finger to type your name\nWhen you're finished, you can press START QUIZ button";
         }
         else
         {
-            t_typeNameDescription.text = "Bem vindo! Use o dedo indicador para digitar seu nome";
+            t_typeNameDescription.text = "Bem vindo! Use o dedo indicador para digitar seu nome\nQuando terminar, pressione o botão STAR QUIZ";
         }          
     }
 }

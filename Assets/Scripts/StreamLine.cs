@@ -15,8 +15,6 @@ public class StreamLine : MonoBehaviour
     public AddScore addScore;
 
     private bool [] oliveOilType = new bool[2];
-    //ChousasNostrasBottle Octopus2
-    //RoundOliveOilBottle_SegredosDoCoa Pizza2
 
     private void Awake()
     {
@@ -32,15 +30,11 @@ public class StreamLine : MonoBehaviour
         {
             oliveOilType[0] = true;
             oliveOilType[1] = false;  
-
-            //Debug.Log("Azeite do ChousasNostras");      
         }
         else if (transform.parent.name == "RoundOliveOilBottle_SegredosDoCoa") //Pizza2
         {
             oliveOilType[0] = false;
-            oliveOilType[1] = true;     
-            //Debug.Log("Azeite do Segredos do Coa");      
-   
+            oliveOilType[1] = true;        
         }
         else if (transform.parent.name == "RoundOliveOilBottle_SegredosDoCoa" && transform.parent.name == "ChousasNostrasBottle") 
         {

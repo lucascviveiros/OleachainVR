@@ -8,6 +8,7 @@ public class TimerCountdown : MonoBehaviour
 {
     private int secondsLeft = 0; 
     private bool b_secondsControl;
+    private bool timeFrozen = false;
     [SerializeField] private Image counterColor;
     [SerializeField] private AudioSource audioFinishing;
   

@@ -1,35 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
     [SerializeField] private GameLoad gameLoad;
-    private bool chonsenLanguage;
+    private bool b_language;
+    private bool b_testOnce = false;
+
+    private void Start() 
+    {
+        //if (!b_testOnce) //for debugging
+            //ChooseLanguage("P");
+            //b_testOnce = true;
+
+        //Debug.Log("Scene: " + GetCurrentScene());
+    }
 
     public void ChooseLanguage(string language)
     {
-        //Debug.Log("Chosen language: " + language);
         if (language == "P")
-            chonsenLanguage = false;
+            b_language = false;
         else if(language == "E")
-            chonsenLanguage = true;
+            b_language = true;
 
-        CallScene(chonsenLanguage);
+        CallScene();
     }
 
-    private void CallScene(bool chonsenLanguage)
+    private void CallScene()
     {
         gameLoad.LoadScene(1); 
-
-        //if(!chonsenLanguage)
-            //gameLoad.LoadScene(1); //PT
-        //else    
-            //gameLoad.LoadScene(2); //EN
     }
 
     public bool GetSceneChonsen()
     {
-        return chonsenLanguage;
+        return b_language;
+    }
+
+    public string GetCurrentScene()
+    {
+        string currentScene = SceneManager.GetActiveScene().name;
+        return currentScene;
     }
 }

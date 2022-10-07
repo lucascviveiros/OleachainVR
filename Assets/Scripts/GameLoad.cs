@@ -7,9 +7,8 @@ using UnityEngine.SceneManagement;
 public class GameLoad : MonoBehaviour
 {
     private SceneController sceneController;
-
     private bool _loading = false;
-
+    private bool language = false;
    
     void Start()
     {
@@ -43,11 +42,11 @@ public class GameLoad : MonoBehaviour
     {
         if(sceneController.GetSceneChonsen()) //en
         {
-            LoadScene(2);
+            LoadScene(3);
         }
         else
         {
-            LoadScene(3);
+            LoadScene(4);
         }       
     }
 }

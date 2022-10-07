@@ -31,10 +31,11 @@ public class DeliveryManager : MonoBehaviour
 
     public void FoodDelivered()
     {
+        initialSeconds = 15;
         timerCountdown.ReturnTimer();
     }
 
-    private void DeliverFood()
+    private void HighlightDeliverPrefab()
     {
         addScore.EnableScoreTimer(false);
         Instantiate(p_deliveryHighlight, referenceDeliveryFood.transform.position, referenceDeliveryFood.transform.rotation);
@@ -42,19 +43,22 @@ public class DeliveryManager : MonoBehaviour
 
     private void ChangeTimerDisplay()
     {
-        initialSeconds--;
-        t_TimerDisplay.GetComponent<TextMeshProUGUI>().text = "00:" + initialSeconds;
+        if(initialSeconds != 0)
+        {
+            initialSeconds--;
+            t_TimerDisplay.GetComponent<TextMeshProUGUI>().text = "00:" + initialSeconds;
+        }
     }
 
     void OnEnable() 
     {
-        TimerCountdown.OnTimerFinished += DeliverFood;
+        TimerCountdown.OnTimerFinished += HighlightDeliverPrefab;
         TimerCountdown.OnTimerChange += ChangeTimerDisplay;
     }
 
     void OnDisable()
     {
-        TimerCountdown.OnTimerFinished -= DeliverFood;
+        TimerCountdown.OnTimerFinished -= HighlightDeliverPrefab;
         TimerCountdown.OnTimerChange -= ChangeTimerDisplay;
     }
 }
