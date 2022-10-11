@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Use this class to Add score to QUIZ_SCENE && GAME_OCULUS (scene)
+/// and set up the transitions between Olive Oil && Canvas Update Detection states (on GAME_OCULUS).
+/// </summary>
 public class AddScore : MonoBehaviour
 {    
     public static AddScore Instance {get; private set; }
