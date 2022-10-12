@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "799942068392",
+    "firebase_url": "https://oleachainvr-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "oleachainvr",
+    "storage_bucket": "oleachainvr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:799942068392:android:43c25d9499cd78d9819a9d",
+        "android_client_info": {
+          "package_name": "com.LucasViveiros.Oleachain"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "799942068392-q37dpl4vivq0t1b427f34uqr2h4io4cl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXW1rqbZNekwYM2nt5G9aWQdNMC0zS9GA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "799942068392-q37dpl4vivq0t1b427f34uqr2h4io4cl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

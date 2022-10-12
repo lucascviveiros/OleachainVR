@@ -6,19 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class GameLoad : MonoBehaviour
 {
-    private SceneController sceneController;
     private bool _loading = false;
-    private bool language = false;
-   
-    void Start()
-    {
-        sceneController = GameObject.FindObjectOfType<SceneController>();
-    }
 
     public void LoadScene(int levelIndex)
     {
-        if (_loading) return;
-        _loading = true;
+        //if (_loading) return;
+        //_loading = true;
         StartCoroutine(LoadSceneAsynchronously(levelIndex));
     }
 
@@ -28,25 +21,13 @@ public class GameLoad : MonoBehaviour
 
         while(!operation.isDone)
         {
-            Debug.Log(operation.progress);
+            //Debug.Log(operation.progress);
             yield return null;
         }
     }
 
-    void Load(int levelIndex)
+    public void Load(int levelIndex)
     {
         SceneManager.LoadScene(levelIndex);
-    }
-
-    public void LoadQuiz()
-    {
-        if(sceneController.GetSceneChonsen()) //en
-        {
-            LoadScene(3);
-        }
-        else
-        {
-            LoadScene(4);
-        }       
     }
 }

@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Quiz_PT.unity
     guid: 1b0802a4e93ff4f6586992470a9a6cf0
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/GAME_OCULUS_SDK.unity
     guid: 03de21ab343a44b149b8c5caace4d209
   - enabled: 0

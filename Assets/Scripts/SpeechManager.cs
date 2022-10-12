@@ -35,24 +35,17 @@ public class SpeechManager : MonoBehaviour
 
         if(sceneController.GetCurrentScene() != "GAME_OCULUS_SDK")
         {
-
-        if (sceneController.GetSceneChonsen())
-        {
-            WelcomeSpeechEN();
-
-        }
-        else
-            WelcomeSpeechPT();
-        
-        }
-
-
+            if(PlayerPrefs.GetInt("LANGUAGE") == 1)
+            {
+                WelcomeSpeechEN();
+            }
+            else
+                WelcomeSpeechPT();   
+            }
         else
         {
             //Tutorial chamado pelo speech game
-        }
-
-        
+        }        
     }
 
     public void WelcomeSpeechPT()
@@ -67,7 +60,7 @@ public class SpeechManager : MonoBehaviour
 
     public void Voice1()
     {
-        if (sceneController.GetSceneChonsen())
+        if(PlayerPrefs.GetInt("LANGUAGE") == 1)
         {
             audioSource.PlayOneShot(audioClips_en[1]);
         }
@@ -79,7 +72,7 @@ public class SpeechManager : MonoBehaviour
 
     public void Voice2()
     {
-        if (sceneController.GetSceneChonsen())
+        if(PlayerPrefs.GetInt("LANGUAGE") == 1)
         {
             audioSource.PlayOneShot(audioClips_en[2]);
         }
@@ -91,7 +84,7 @@ public class SpeechManager : MonoBehaviour
 
     public void Voice3()
     {
-        if (sceneController.GetSceneChonsen())
+        if(PlayerPrefs.GetInt("LANGUAGE") == 1)
         {
             audioSource.PlayOneShot(audioClips_en[3]);
         }
@@ -103,7 +96,7 @@ public class SpeechManager : MonoBehaviour
 
     public void VoiceEnd()
     {
-        if (sceneController.GetSceneChonsen())
+        if(PlayerPrefs.GetInt("LANGUAGE") == 1)
         {
             audioSource.PlayOneShot(audioClips_en[4]);
         }
@@ -115,7 +108,7 @@ public class SpeechManager : MonoBehaviour
 
     public void VoiceNice()
     {
-        if (sceneController.GetSceneChonsen())
+        if(PlayerPrefs.GetInt("LANGUAGE") == 1)
         {
             audioSource.PlayOneShot(audioClips_en[5]);
         }
@@ -127,7 +120,7 @@ public class SpeechManager : MonoBehaviour
 
     public void TutorialPT_EN()
     {
-        if (sceneController.GetSceneChonsen())
+        if(PlayerPrefs.GetInt("LANGUAGE") == 1)
         {
             audioSource.PlayOneShot(audioClips_en[6]);
         }

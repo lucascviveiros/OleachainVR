@@ -4,7 +4,6 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-
 public class TypeName : MonoBehaviour
 {
     public TextMeshProUGUI nameText;
@@ -27,5 +26,4 @@ public class TypeName : MonoBehaviour
         user_name += " ";
         nameText.text = user_name;
     }
-
 }

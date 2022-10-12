@@ -6,24 +6,28 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
     [SerializeField] private GameLoad gameLoad;
-    private bool b_language;
+
     private bool b_testOnce = false;
 
-    private void Start() 
+    private void Awake() 
     {
+        gameLoad = GameObject.Find("[GAME_LOAD]").GetComponent<GameLoad>();
+        
         //if (!b_testOnce) //for debugging
             //ChooseLanguage("P");
             //b_testOnce = true;
 
-        //Debug.Log("Scene: " + GetCurrentScene());
     }
 
     public void ChooseLanguage(string language)
     {
         if (language == "P")
-            b_language = false;
-        else if(language == "E")
-            b_language = true;
+            PlayerPrefs.SetInt("LANGUAGE", 0);
+        
+        if(language == "E")
+            PlayerPrefs.SetInt("LANGUAGE", 1);
+
+            //b_language = true;
 
         CallScene();
     }
@@ -32,15 +36,33 @@ public class SceneController : MonoBehaviour
     {
         gameLoad.LoadScene(1); 
     }
-
+    /*
     public bool GetSceneChonsen()
     {
         return b_language;
-    }
+    }*/
 
     public string GetCurrentScene()
     {
         string currentScene = SceneManager.GetActiveScene().name;
         return currentScene;
+    }
+
+    public void StartQuiz()
+    {
+        //if(GetSceneChonsen()) //en
+        if(PlayerPrefs.GetInt("LANGUAGE") == 1)
+        {
+            gameLoad.LoadScene(3);
+        }
+        else
+        {
+            gameLoad.LoadScene(4);
+        }     
+    }
+
+    public void StartLanguage()
+    {
+        gameLoad.Load(0);
     }
 }

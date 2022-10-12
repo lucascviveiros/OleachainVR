@@ -9,6 +9,7 @@ public class WaitWelcomeSpeech : MonoBehaviour
     private void Awake() 
     {
         gameLoad = FindObjectOfType<GameLoad>();
+        //LoadSceneAfterSpeech(); //Debugging
     }
     
     private void LoadSceneAfterSpeech()

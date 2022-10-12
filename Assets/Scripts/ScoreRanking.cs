@@ -1,26 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
-///Start on TypeName scene
-public class ScoreRanking : MonoBehaviour
+namespace OleaChainVR
 {
-    [SerializeField] private TextMeshProUGUI userName;
-
-    void Start()
+    public class ScoreRanking : MonoBehaviour
     {
-        userName = GameObject.Find("CanvasName/Panel/InputName").GetComponent<TextMeshProUGUI>();
-    }
+        [SerializeField] private TextMeshProUGUI userName;
+        [SerializeField] private FirebaseManager firebaseManager;
+        string savedUserName;
 
-    public void SaveUserName()
-    {
-        string saveUserName = userName.text.ToString();
-        Debug.Log("UserName saved: " + saveUserName);
-    }
+        private void Awake()
+        {
+            //savedUserName = "fulano5"; //Debugging
+            userName = GameObject.Find("CanvasName/Panel/InputName").GetComponent<TextMeshProUGUI>();
+            firebaseManager = FindObjectOfType<FirebaseManager>();
+        }
 
-    public void SaveScore(int score)
-    {
-        Debug.Log("Score Saved: " + score);
+        public void SaveUserName()
+        {
+            savedUserName = userName.text.ToString();
+            //SaveUser.UserName = savedUserName;
+            PlayerPrefs.SetString("USER_NAME", savedUserName);
+        }
+
+        public void SaveScore(int score)
+        {
+            Debug.Log("Score Saved: " + score);
+        }
+
+        
     }
 }
