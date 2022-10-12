@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class AgentController : MonoBehaviour
 {
-    public Animator animator;
+    public Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
-
+        anim = GetComponent<Animator>();
+        //anim.SetBool("OtherAnimationInController", true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*
-        if (Input.GetKeyDown("space"))
+        //{Debug}
+        /*if (Input.GetKeyDown("space"))
         {
             Debug.Log("Key pressed:");
             animator.SetBool("Idle", false);
