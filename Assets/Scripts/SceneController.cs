@@ -12,11 +12,9 @@ public class SceneController : MonoBehaviour
     private void Awake() 
     {
         gameLoad = GameObject.Find("[GAME_LOAD]").GetComponent<GameLoad>();
-        
         //if (!b_testOnce) //for debugging
             //ChooseLanguage("P");
             //b_testOnce = true;
-
     }
 
     public void ChooseLanguage(string language)
@@ -28,7 +26,6 @@ public class SceneController : MonoBehaviour
             PlayerPrefs.SetInt("LANGUAGE", 1);
 
             //b_language = true;
-
         CallScene();
     }
 
@@ -36,11 +33,6 @@ public class SceneController : MonoBehaviour
     {
         gameLoad.LoadScene(1); 
     }
-    /*
-    public bool GetSceneChonsen()
-    {
-        return b_language;
-    }*/
 
     public string GetCurrentScene()
     {
@@ -50,19 +42,19 @@ public class SceneController : MonoBehaviour
 
     public void StartQuiz()
     {
-        //if(GetSceneChonsen()) //en
         if(PlayerPrefs.GetInt("LANGUAGE") == 1)
-        {
             gameLoad.LoadScene(3);
-        }
         else
-        {
-            gameLoad.LoadScene(4);
-        }     
+            gameLoad.LoadScene(4);  
     }
 
     public void StartLanguage()
     {
-        gameLoad.Load(0);
+        gameLoad.LoadScene(0);
+    }
+
+    public void StartRankingScene()
+    {
+        gameLoad.LoadScene(5);
     }
 }

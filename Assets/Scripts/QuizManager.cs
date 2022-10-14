@@ -176,7 +176,7 @@ namespace OleaChainVR
         {
             "A", //1 
             "A", //2
-            "D", //3
+            "B", //3
             "B", //4
             "B", //5
             "A", //6 
@@ -416,7 +416,7 @@ namespace OleaChainVR
         private IEnumerator WaitForLoadGame()
         {
             yield return new WaitForSecondsRealtime(2f);
-            sceneController.StartLanguage();
+            sceneController.StartRankingScene();
         }
 
         private void ChangeTimerDisplay()

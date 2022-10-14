@@ -10,8 +10,10 @@ public class GameLoad : MonoBehaviour
 
     public void LoadScene(int levelIndex)
     {
+        //Debug.Log("LoadScene_" + levelIndex);
         //if (_loading) return;
         //_loading = true;
+
         StartCoroutine(LoadSceneAsynchronously(levelIndex));
     }
 
