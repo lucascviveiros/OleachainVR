@@ -70,7 +70,7 @@ namespace OleaChainVR
         private AudioClip clip;
         private bool lockAnswer;
         private int round = 0;
-        private int initialSeconds = 10;
+        private int initialSeconds = 120;
         private List<QuizManager.Quiz> randomQuiz = new List<QuizManager.Quiz>();
         private SceneController sceneController;
         private int scoreQuiz = 0; 
