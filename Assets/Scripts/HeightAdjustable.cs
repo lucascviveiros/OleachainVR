@@ -8,6 +8,7 @@ public class HeightAdjustable : MonoBehaviour
     [SerializeField] private GameObject virtualKeyboard;
     private const float DISTANCE = 0.9f;
     private float SPEED = 0.5f;
+    public float xDistance = 0.09f;
     
     private void Awake() 
     {
@@ -32,7 +33,7 @@ public class HeightAdjustable : MonoBehaviour
             posTo.y = 0.6f;
         }
 
-        posTo.x = 0.09f;
+        posTo.x = xDistance;
         virtualKeyboard.transform.position = Vector3.SlerpUnclamped(virtualKeyboard.transform.position, posTo, speed);    
                
     }
