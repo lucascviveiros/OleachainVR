@@ -11,6 +11,7 @@ namespace OleaChainVR
 {
     public class QuizManager : MonoBehaviour
     {
+        //Nested Class to store Quiz data structure
         public class Quiz
         {
             private string answer;
@@ -258,16 +259,20 @@ namespace OleaChainVR
 
         private void Start() 
         {
+            //Looking for VirtualKeyboard for to receive user's answers
             virtualKeyboard = GameObject.Find("VirtualKeyboard");
+            //Looking for some text in the UI
             t_question = GameObject.Find("[CANVAS_QUIZ]/Panel/TextQuestion").GetComponent<TextMeshProUGUI>();
             t_options = GameObject.Find("[CANVAS_QUIZ]/Panel/TextOptions").GetComponent<TextMeshProUGUI>();
             t_answerDescription = GameObject.Find("[CANVAS_ANSWER]/Panel/TextAnswer").GetComponent<TextMeshProUGUI>();
             t_score = GameObject.Find("[CANVAS_SCORE]/Panel/TextScore").GetComponent<TextMeshProUGUI>();
             t_score.text = "0";
             t_TimerDisplay = GameObject.Find("[CANVAS_QUIZ]/Panel/BackgroungTimerPanel/TextTimerDisplay").GetComponent<TextMeshProUGUI>();
+            //Setting up initial count down timer in the UI
             t_TimerDisplay.GetComponent<TextMeshProUGUI>().text = "00:" + initialSeconds;
             timerCountdown = FindObjectOfType<TimerCountdown>();
-            timerCountdown.SetInitialSecondsLeft(initialSeconds);            
+            timerCountdown.SetInitialSecondsLeft(initialSeconds);    
+            //Looking for Firebase instance
             firebaseManager = FindObjectOfType<FirebaseManager>();
 
             CanvasAnswer = GameObject.Find("[CANVAS_ANSWER]");
@@ -433,12 +438,14 @@ namespace OleaChainVR
 
         public void SendToFirebase(int finalScore)
         {
-            //string userName =  SaveUser.UserName.ToString();
             string userName = PlayerPrefs.GetString("USER_NAME");
             Debug.Log("SendToFire: " + userName);
             firebaseManager.ReceiveFinalQuizData(userName, finalScore);
         }
 
+        //Setting up Quiz Events
+        //ChangeTimerDisplay to update the timer in the UI and color
+        //FinishQuiz to call RankingScene and send final score values to firebase instance
         void OnEnable() 
         {
             TimerCountdown.OnTimerFinished += FinishQuiz;
