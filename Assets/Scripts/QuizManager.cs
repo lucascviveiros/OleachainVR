@@ -274,16 +274,17 @@ namespace OleaChainVR
             timerCountdown.SetInitialSecondsLeft(initialSeconds);    
             //Looking for Firebase instance
             firebaseManager = FindObjectOfType<FirebaseManager>();
-
+            //Looking for UI Canvas to show and hide scores
             CanvasAnswer = GameObject.Find("[CANVAS_ANSWER]");
             CanvasScore = GameObject.Find("[CANVAS_SCORE]");
             CanvasPrincipal = GameObject.Find("[CANVAS_QUIZ]");
             CanvasAnswer.SetActive(false);
             CanvasScore.SetActive(false);
-
+            //Creating nested list with quiz data structure
             List<QuizManager.Quiz> listQuiz = new List<QuizManager.Quiz>();
+            //Looking for scene controller
             sceneController = GameObject.FindObjectOfType<SceneController>();
-
+            //Getting the language choosed by the user in the main scene
             if(PlayerPrefs.GetInt("LANGUAGE") == 1)
             {
                 for(int i = 0; i<= (question_en.Count - 1); i++)    
@@ -298,15 +299,15 @@ namespace OleaChainVR
                     listQuiz.Add(new QuizManager.Quiz(question.ElementAt(i), options.ElementAt(i), answers[i], answersDescription[i]));
                 }
             }        
-            
+            //Randomizing questions in the list
             Random rng = new Random();
             randomQuiz = listQuiz.OrderBy(_ => rng.Next()).ToList();
+            //Updating the first questions information in the UI
             t_question.text = randomQuiz.ElementAt(0).Question;
             t_options.text = randomQuiz.ElementAt(0).Options;
-
-            //FinishQuiz(); //Debugging
         }
 
+        //Called when the user get right to the questions
         private void PlayForCorrectAnswer()
         {
             ActivateParticle();
@@ -315,6 +316,7 @@ namespace OleaChainVR
             audioSource.Play();
         }
         
+        //Called when the user miss the questions
         private void PlayForWrongAnswer()
         {
             clip = audioClips[0];
@@ -322,15 +324,18 @@ namespace OleaChainVR
             audioSource.Play();
         }
 
+        //ReceiveAnswer is used as an input for each virtual button pressed
         public void ReceiveAnswer(string answer)
         {
             VerifyAnswer(answer);
         }
-
+        
         private void VerifyAnswer(string option)
         {
+            //lockAnswer for a period avoiding double selection
             if(!lockAnswer)
             {
+                //Verifying the correct answers list with the option choosed by the user
                 if(randomQuiz.ElementAt(round).Answer == option)
                 {
                     AddScore();
@@ -348,18 +353,21 @@ namespace OleaChainVR
             }
         }
 
+        //If the user miss the question it shows the correct answer canvas in the UI
         private void ShowRightAnswer(int round)
         {
             CanvasAnswer.SetActive(true);
             t_answerDescription.text = randomQuiz.ElementAt(round).AnswerDescription;
         }
 
+        //If the user get right to question it show the score sommatory achieved in the moment
         private void ShowScore()
         {
             CanvasScore.SetActive(true);
             t_score.text = scoreQuiz.ToString();
         }
-
+        
+        //Some delay to show score or correct answer before update to the next question
         private IEnumerator WaitForNextAnswer()
         {
             yield return new WaitForSecondsRealtime(5f);
@@ -370,8 +378,10 @@ namespace OleaChainVR
             NextRound();
         }
 
+        //Search for the next question value in the randominezed list
         private void NextRound()
         {
+            //Verify if the user reached the end of the list of questions before time ran out
             if(round < (randomQuiz.Count - 1))
             {
                 round++;
@@ -380,10 +390,12 @@ namespace OleaChainVR
             }
             else
             {
+                //Called if the user answered all the questions
                 FinishQuiz(); 
             }
         }
 
+        //Activate some particles effect for correct answers
         private void ActivateParticle()
         {
             Vector3 particleY = new Vector3(0.0f, 0.1f, 0.0f);
@@ -391,7 +403,8 @@ namespace OleaChainVR
             var particle = Instantiate(particleSystem, particleY, referenceTransform.transform.rotation);
             Destroy(particle, 2.0f);
         }
-
+        
+        //Updating points to the score
         private void AddScore()
         {
             scoreQuiz += 100;
@@ -407,7 +420,8 @@ namespace OleaChainVR
         {
             virtualKeyboard.SetActive(false);
         }
-
+        
+        //Called if quiz time runs out or user answered all questions
         private void FinishQuiz()
         {
             SendToFirebase(scoreQuiz);
@@ -423,7 +437,8 @@ namespace OleaChainVR
             yield return new WaitForSecondsRealtime(2f);
             sceneController.StartRankingScene();
         }
-
+        
+        //Update the countdown timer display 
         private void ChangeTimerDisplay()
         {
             initialSeconds--;
@@ -436,6 +451,7 @@ namespace OleaChainVR
             t_TimerDisplay.GetComponent<TextMeshProUGUI>().text = answer.ToString();
         }
 
+        //Send to firebase NOSQL database the final score and user name
         public void SendToFirebase(int finalScore)
         {
             string userName = PlayerPrefs.GetString("USER_NAME");
