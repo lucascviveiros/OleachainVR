@@ -3,7 +3,7 @@
 This project is under the scope of Oleachain NORTE-06-3559-FSE-000188. 
 The VR application was developed to Oculus Quest device. 
 It allows the interaction with virtual objects through hands recognition and hands gestures.
-Random questions generated in the Quiz scene. Virtual buttons interaction. Score and ranking saved in a NOSQL database (Firebase) 
+Random questions generated in the Quiz scene. Virtual buttons interaction. Score and ranking saved in a NoSQL database (using Firebase) 
 
 
 
