@@ -7,9 +7,13 @@ public class TypeWriterEffect : MonoBehaviour
 {
     public TextMeshProUGUI textUI;
     //[SerializeField] private SceneController sceneController;
-    private float delayWriter = 0.035f;
-    private string welcomeEN = "Hello, welcome to the virtual reality experience within the framework of the Oleachain project. You will have fun and learn a little more about olive growing and related processes. We will start with a quiz of questions, your score will increase as you get the questions right, are you ready? So let's go!";
-    private string welcomePT = "Olá, muito bem vindo a experiência de realidade virtual no âmbito do projeto Oleachain. Você irá se divertir e aprender um pouco mais sobre a olivicultura e processos relacionados a cadeia de valor dos olivais. Iremos começar com um quiz de perguntas, a sua pontuação irá aumentar conforme você acertar as questões, está preparado? Então vamos lá!";
+    private float delayWriter;
+    private float delayWriterPT = 0.05f; //0.035f
+    private float delayWriterEN = 0.07f; //0.035f
+    private string welcomeEN = "Hello, welcome to the virtual reality experience in the framework of the Oleachain project. You are about to enter and experience full of fun and learn about olive growing and its related processes. Let's start with a quiz of questions, your score will increase if you answer the questions correctly. Are you ready?\nSo let's go!";
+    //private string welcomePT = "Olá, muito bem vindo a experiência de realidade virtual no âmbito do projeto Oleachain. Você irá se divertir e aprender um pouco mais sobre a olivicultura e processos relacionados a cadeia de valor dos olivais. Iremos começar com um quiz de perguntas, a sua pontuação irá aumentar conforme você acertar as questões, está preparado? Então vamos lá!";
+    private string welcomePT = "Olá, muito bem vindo a experiência de realidade virtual no âmbito do projeto Oleachain. Está prestes a entrar numa experiência de diversão e aprendizagem sobre a olivicultura e os processos a ela relacionados. Vamos começar com um quiz de perguntas, a sua pontuação irá aumentar se responder corretamente as questões. Está preparado? Então vamos lá!";
+
     public delegate void WelcomeSpeechFinished();
     public static event WelcomeSpeechFinished OnWelcomeSpeechFinished;
 
@@ -20,12 +24,12 @@ public class TypeWriterEffect : MonoBehaviour
         //if (sceneController.GetSceneChonsen())
         if(PlayerPrefs.GetInt("LANGUAGE") == 1)
         {
-            delayWriter = 0.044f;
+            delayWriter = delayWriterEN;
             StartCoroutine("TypeWriter", welcomeEN);
         }
         else if (PlayerPrefs.GetInt("LANGUAGE") == 0)
         {
-            delayWriter = 0.044f;
+            delayWriter = delayWriterPT;
             StartCoroutine("TypeWriter", welcomePT);
         }   
     }

@@ -58,6 +58,7 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+Assets/LargeFilesOleachainVR
 Assets/LargeFiles/_Creepy_Cat/3D Games Effects Pack Free/_FAQ - Informations.meta
 Assets/LargeFiles/_Creepy_Cat/3D Games Effects Pack Free/_FAQ - Informations/Help Readme SOS.txt
 Assets/LargeFiles/_Creepy_Cat/3D Games Effects Pack Free/_FAQ - Informations/Help Readme SOS.txt.meta
@@ -4090,3 +4091,5 @@ Assets/LargeFiles/CustomVRInteraction/PokeInteractable_ButtonShort.prefab
 Assets/LargeFiles/CustomVRInteraction/PokeInteractable_ButtonShort.prefab.meta
 Assets/LargeFiles/Prefabs/\[HEIGHT_ADJUSTABLE\].prefab
 Assets/LargeFiles/Prefabs/\[HEIGHT_ADJUSTABLE\].prefab.meta
+Assets/LargeFilesOleachainVR/.DS_Store
+Assets/LargeFilesOleachainVR.meta

@@ -5,25 +5,25 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Language.unity
     guid: 9039be4c44551451ebb19a5615e2e963
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Welcome.unity
     guid: 4eaaddb330da34eaaaa952c7ea47af4e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TypeName.unity
     guid: 3e2739848507149b2aa0c3e7ffcc84c8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Quiz_EN.unity
     guid: 169ea13c8bede471c840174edfae4f17
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Quiz_PT.unity
     guid: 1b0802a4e93ff4f6586992470a9a6cf0
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Ranking.unity
     guid: f0ecf39d4da8f4b698cbce0b97b1373d
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/GAME_OCULUS_SDK.unity
     guid: 03de21ab343a44b149b8c5caace4d209
   - enabled: 0

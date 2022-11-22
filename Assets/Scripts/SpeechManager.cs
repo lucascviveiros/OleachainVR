@@ -16,7 +16,7 @@ public class SpeechManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         //Audio English
-        audioClips_en[0] = Resources.Load<AudioClip>("Prefabs/Voice/rosa_voice_welcome_en");
+        audioClips_en[0] = Resources.Load<AudioClip>("Prefabs/Voice/intro_audio_master_en");
         audioClips_en[1] = Resources.Load<AudioClip>("Prefabs/Voice/rosa_voice_1_en");
         audioClips_en[2] = Resources.Load<AudioClip>("Prefabs/Voice/rosa_voice_2_en");
         audioClips_en[3] = Resources.Load<AudioClip>("Prefabs/Voice/rosa_voice_3_en");
@@ -25,7 +25,7 @@ public class SpeechManager : MonoBehaviour
         audioClips_en[6] = Resources.Load<AudioClip>("Prefabs/Voice/rosa_game_tutorial_en");
 
         //Audio Portuguese
-        audioClips_pt[0] = Resources.Load<AudioClip>("Prefabs/Voice/rosa_voice_welcome_pt");
+        audioClips_pt[0] = Resources.Load<AudioClip>("Prefabs/Voice/intro_audio_master_pt");
         audioClips_pt[1] = Resources.Load<AudioClip>("Prefabs/Voice/rosa_voice_1_pt");
         audioClips_pt[2] = Resources.Load<AudioClip>("Prefabs/Voice/rosa_voice_2_pt");
         audioClips_pt[3] = Resources.Load<AudioClip>("Prefabs/Voice/rosa_voice_3_pt");
