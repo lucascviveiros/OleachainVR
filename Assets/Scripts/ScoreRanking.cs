@@ -10,11 +10,10 @@ namespace OleaChainVR
     {
         [SerializeField] private TextMeshProUGUI userName;
         [SerializeField] private FirebaseManager firebaseManager;
-        string savedUserName;
+        private string savedUserName;
 
         private void Awake()
         {
-            //savedUserName = "fulano5"; //Debugging
             userName = GameObject.Find("CanvasName/Panel/InputName").GetComponent<TextMeshProUGUI>();
             firebaseManager = FindObjectOfType<FirebaseManager>();
         }
@@ -22,7 +21,6 @@ namespace OleaChainVR
         public void SaveUserName()
         {
             savedUserName = userName.text.ToString();
-            //SaveUser.UserName = savedUserName;
             PlayerPrefs.SetString("USER_NAME", savedUserName);
         }
 
@@ -30,7 +28,5 @@ namespace OleaChainVR
         {
             Debug.Log("Score Saved: " + score);
         }
-
-        
     }
 }
