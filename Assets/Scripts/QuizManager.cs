@@ -129,8 +129,8 @@ namespace OleaChainVR
         {
             "A. Vara.\nB. Sachola.\nC. Trator.\nD. Foice.", //1
             "A. ... de 3 a 5 mil anos.\nB. ... menos de 500 anos.\nC. ... de 6 a 9 mil anos.\nD. ... de 500 anos a 2000 anos.", //2
-            "A. Estremadura.\nB. Trás-os-Montes.\nC. Alentejo.\nD. Minho", //3
-            "A. Pela leitura do rótulo.\nB. Através da avaliação dos parâmetros de qualidade.\nC. Através da acidez.D.\nAtravés da cor do azeite", //4
+            "A. Estremadura.\nB. Trás-os-Montes.\nC. Alentejo\nD. Minho", //3
+            "A. Pela leitura do rótulo.\nB. Através da avaliação dos parâmetros de qualidade.\nC. Através da acidez.\nD.Através da cor do azeite", //4
             "A. Portugal.\nB. Grécia.\nC. Itália.\nD. Espanha", //5
             "A. Tradicional\nB. Intensivo.\nC. Super intensivo.\nD. Não existe olival em Trás-os-Montes.", //6        
             "A. 5 pessoas.\nB. 33 pessoas.\nC. 12 pessoas.\nD. 7 pessoas.", //7
@@ -160,7 +160,7 @@ namespace OleaChainVR
             "A. 5 people.\nB. 33 people.\nC. 12 people.\nD. 7 people.", //7
             "A. Gostei – Bragança.\nB. Cascalhos – Abrantes.\nC. Bemposta – Mogadouro.\nD. Arraiolos – Évora.", //8
             "A. Death.\nB. Peace.\nC. Fertility.\nD. Purity.", //9
-            "A. An oil made with olives of a single cultivar.\nB. A fat extracted only by physical and mechanical processes.\nC. A superior quality oil.\nD. An oil that has no quality whatsoever.", //10
+            "A. An oil made with olives of a single cultivation.\nB. A fat extracted only by physical and mechanical processes.\nC. A superior quality oil.\nD. An oil that has no quality whatsoever.", //10
             "A. Cordovil, Carrasquenha, Picual, Negrinha and Gordal.\nB. Picual, Arbequina, Leccino, Coratina and Frantoio.\nC. Verdeal, Madural, Negrinha, Santulhana and Cobrançosa.\nD. Coratina, Missão, Kalamata, Gordal and Verdeal.", //11
             "A. From January to March.\nB. From March to May.\nC. From June to August.\nD. From October to January.", //12
             "A. 900 kcal.\nB. 100 kcal.\nC. 650 kcal.\nD.220 kcal.", //13
