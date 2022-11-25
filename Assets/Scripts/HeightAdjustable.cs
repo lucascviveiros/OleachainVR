@@ -5,18 +5,23 @@ using UnityEngine;
 public class HeightAdjustable : MonoBehaviour
 {
     [SerializeField] private  GameObject CenterEyeAnchor;
-    [SerializeField] private GameObject objectToMoveWithCameraPosition;
+    [SerializeField] private GameObject moveObjWithCamPosition;
     [SerializeField] private string findObjectName = "VirtualKeyboard";
-    [SerializeField] private float DISTANCE = 0.9f;
-    [SerializeField] private float xDistance = 0.09f;
-    [SerializeField] private float yMaxDistanceLimit = 0.9f;
-    [SerializeField] private float yMinDistanceLimit = 0.6f;
+    [SerializeField] private float z_axisDist = 0.9f;
+    [SerializeField] private float x_axisDist = 0.09f;
+    [SerializeField] private float y_axisMaxDist = 0.9f;
+    [SerializeField] private float y_axisMinDist = 0.6f;
     private float SPEED = 0.5f;
 
     private void Awake() 
     {
-        objectToMoveWithCameraPosition = GameObject.Find(findObjectName);
+        moveObjWithCamPosition = GameObject.Find(findObjectName);
         CenterEyeAnchor = GameObject.Find("CenterEyeAnchor");
+    }
+
+    private void Update()
+    {
+        HeadLock();
     }
 
     private void HeadLock()
@@ -24,25 +29,19 @@ public class HeightAdjustable : MonoBehaviour
         float speed;
         speed = Time.deltaTime * SPEED;
 
-        Vector3 posTo = CenterEyeAnchor.transform.position + (CenterEyeAnchor.transform.forward * DISTANCE);
+        Vector3 posTo = CenterEyeAnchor.transform.position + (CenterEyeAnchor.transform.forward * z_axisDist);
         posTo.y = posTo.y - 0.5f;
 
-        if (posTo.y >= yMaxDistanceLimit)
+        if (posTo.y >= y_axisMaxDist)
         {
-            posTo.y = yMaxDistanceLimit;
+            posTo.y = y_axisMaxDist;
         }
-        else if (posTo.y <= yMinDistanceLimit)
+        else if (posTo.y <= y_axisMinDist)
         {
-            posTo.y = yMinDistanceLimit;
+            posTo.y = y_axisMinDist;
         }
 
-        posTo.x = xDistance;
-        objectToMoveWithCameraPosition.transform.position = Vector3.SlerpUnclamped(objectToMoveWithCameraPosition.transform.position, posTo, speed);    
-               
-    }
- 
-    private void Update()
-    {
-        HeadLock();
+        posTo.x = x_axisDist;
+        moveObjWithCamPosition.transform.position = Vector3.SlerpUnclamped(moveObjWithCamPosition.transform.position, posTo, speed);    
     }
 }

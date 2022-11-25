@@ -9,7 +9,7 @@ using UnityEngine.UI;
 /// </summary>
 public class AddScore : MonoBehaviour
 {    
-    public static AddScore Instance {get; private set; }
+    public static AddScore Instance { get; private set; }
     public bool activateScore;
     public bool enableScoreTimer;
     public Text oliveOilText;
@@ -50,7 +50,7 @@ public class AddScore : MonoBehaviour
 
     public void RightOliveOil()
     {
-        oliveOilText.text = "Boa!";
+        oliveOilText.text = "Corretly Oil!";
         oliveOilText.color = Color.green;
     }
 }
