@@ -5,14 +5,17 @@ using UnityEngine;
 public class HeightAdjustable : MonoBehaviour
 {
     [SerializeField] private  GameObject CenterEyeAnchor;
-    [SerializeField] private GameObject virtualKeyboard;
-    private const float DISTANCE = 0.9f;
+    [SerializeField] private GameObject objectToMoveWithCameraPosition;
+    [SerializeField] private string findObjectName = "VirtualKeyboard";
+    [SerializeField] private float DISTANCE = 0.9f;
+    [SerializeField] private float xDistance = 0.09f;
+    [SerializeField] private float yMaxDistanceLimit = 0.9f;
+    [SerializeField] private float yMinDistanceLimit = 0.6f;
     private float SPEED = 0.5f;
-    public float xDistance = 0.09f;
-    
+
     private void Awake() 
     {
-        virtualKeyboard = GameObject.Find("VirtualKeyboard");
+        objectToMoveWithCameraPosition = GameObject.Find(findObjectName);
         CenterEyeAnchor = GameObject.Find("CenterEyeAnchor");
     }
 
@@ -24,17 +27,17 @@ public class HeightAdjustable : MonoBehaviour
         Vector3 posTo = CenterEyeAnchor.transform.position + (CenterEyeAnchor.transform.forward * DISTANCE);
         posTo.y = posTo.y - 0.5f;
 
-        if (posTo.y >= 0.9f)
+        if (posTo.y >= yMaxDistanceLimit)
         {
-            posTo.y = 0.9f;
+            posTo.y = yMaxDistanceLimit;
         }
-        else if (posTo.y <= 0.6f)
+        else if (posTo.y <= yMinDistanceLimit)
         {
-            posTo.y = 0.6f;
+            posTo.y = yMinDistanceLimit;
         }
 
         posTo.x = xDistance;
-        virtualKeyboard.transform.position = Vector3.SlerpUnclamped(virtualKeyboard.transform.position, posTo, speed);    
+        objectToMoveWithCameraPosition.transform.position = Vector3.SlerpUnclamped(objectToMoveWithCameraPosition.transform.position, posTo, speed);    
                
     }
  
