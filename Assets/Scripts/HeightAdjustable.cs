@@ -11,7 +11,7 @@ public class HeightAdjustable : MonoBehaviour
     [SerializeField] private float x_axisDist = 0.09f;
     [SerializeField] private float y_axisMaxDist = 0.9f;
     [SerializeField] private float y_axisMinDist = 0.6f;
-    private float SPEED = 0.5f;
+    [SerializeField] private float speed_weighting = 0.5f;
 
     private void Awake() 
     {
@@ -27,10 +27,10 @@ public class HeightAdjustable : MonoBehaviour
     private void HeadLock()
     {
         float speed;
-        speed = Time.deltaTime * SPEED;
+        speed = Time.deltaTime * speed_weighting;
 
         Vector3 posTo = CenterEyeAnchor.transform.position + (CenterEyeAnchor.transform.forward * z_axisDist);
-        posTo.y = posTo.y - 0.5f;
+        //posTo.y = posTo.y - 0.5f;
 
         if (posTo.y >= y_axisMaxDist)
         {
@@ -39,6 +39,11 @@ public class HeightAdjustable : MonoBehaviour
         else if (posTo.y <= y_axisMinDist)
         {
             posTo.y = y_axisMinDist;
+        }
+
+        if (posTo.z < 0.7f)
+        {
+            posTo.z = 0.7f;
         }
 
         posTo.x = x_axisDist;
