@@ -11,7 +11,7 @@ namespace OleaChainVR
 {
     public class QuizManager : MonoBehaviour
     {
-        //Nested Class to store Quiz data structure
+        //Nested Class used to store Quiz data structure
         public class Quiz
         {
             private string answer;
