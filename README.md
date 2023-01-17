@@ -1,6 +1,6 @@
 # OleachainVR
 
-The "OnQuizVR" application to Oculus Quest devices under the scope of Oleachain NORTE-06-3559-FSE-000188.
+The OleachainVR - A Survey based on  educational-content of olive trees in VR . The application runs on Oculus Quest devices. Project under the scope of Oleachain NORTE-06-3559-FSE-000188.
 
 
 Features: 
