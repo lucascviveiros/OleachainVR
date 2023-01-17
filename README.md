@@ -1,6 +1,6 @@
 # OleachainVR
 
-A QuestVR application to Oculus Quest devices under the scope of Oleachain NORTE-06-3559-FSE-000188.
+The "OnQuizVR" application to Oculus Quest devices under the scope of Oleachain NORTE-06-3559-FSE-000188.
 
 
 Features: 
