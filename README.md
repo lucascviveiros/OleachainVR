@@ -1,13 +1,12 @@
 # OleachainVR
 
-This project is under the scope of Oleachain NORTE-06-3559-FSE-000188. 
-The VR application was developed to Oculus Quest device. 
-It allows the interaction with virtual objects through hands recognition and hands gestures.
-Random questions generated in the Quiz scene. Virtual buttons interaction. Score and ranking saved in a NoSQL database (using Firebase) 
+A QuestVR application to Oculus Quest devices under the scope of Oleachain NORTE-06-3559-FSE-000188.
 
 
-
-- Language option
+Features: 
+  - Virtual Interaction with virtual objects through hands recognition and gestures using Oculus Integration version .
+  - Random questions generated in the Quiz scene. Virtual buttons interaction. Score and ranking saved in NoSQL Databases of Firebase. 
+  - Option to choose Languages (Portuguese and English).
 
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/21102697/202224952-7076e713-741e-4bf0-9d66-88dfba409028.gif)
 
