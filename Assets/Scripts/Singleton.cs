@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
-namespace DilmerGames.Core.Singletons
-{
+
     public class Singleton<T> : MonoBehaviour
         where T : Component //T = Logger
     {
@@ -33,4 +32,3 @@ namespace DilmerGames.Core.Singletons
             }
         }
     }
-}
